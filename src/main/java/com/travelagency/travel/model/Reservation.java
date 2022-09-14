@@ -1,5 +1,6 @@
 package com.travelagency.travel.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -46,11 +47,6 @@ public class Reservation implements Serializable {
 
     @OneToOne( cascade = CascadeType.ALL )
     @JoinColumn( name="id_user")
-    private User user;
-
-    @ManyToMany
-    @JoinTable( name = "subscribe",
-            joinColumns = @JoinColumn( name = "id_reservation" ),
-            inverseJoinColumns = @JoinColumn( name = "id_activity" ) )
-    private Set<Activity> activities = new HashSet<>();
+    private Users user;
+    
 }
