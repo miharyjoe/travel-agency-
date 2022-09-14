@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class TravelController {
     }
 
     @GetMapping("/{id}")
-    public Travel getTravelById(@PathVariable Long id){
+    public Optional<Travel> getTravelById(@PathVariable Long id){
         return service.findTravelById(id);
     }
 

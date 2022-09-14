@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +21,8 @@ public class TravelService {
         return repository.findAll(pageable).toList();
     }
 
-    public Travel findTravelById(Long id){
-        return repository.getReferenceById(id);
+    public Optional<Travel> findTravelById(Long id){
+        return repository.findById(id);
     }
 
     public List<Travel> saveTravel(List<Travel> travels){

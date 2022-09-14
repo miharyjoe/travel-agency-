@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class Travel implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Long id_travel;
 
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -47,10 +49,7 @@ public class Travel implements Serializable {
     private LocalDateTime date_departure;
 
     @Column(nullable = false)
-    private String daytime_duration;
-
-    @Column(nullable = false)
-    private int night_duration;
+    private String duration;
 
     @Column(nullable = false)
     private int nbr_place;
@@ -59,12 +58,8 @@ public class Travel implements Serializable {
     private String country;
 
     @Column(nullable = false)
-    private String saison;
+    private double tarif;
 
-    @ManyToMany
-    @JoinTable( name = "cost",
-            joinColumns = @JoinColumn( name = "id_travel" ),
-            inverseJoinColumns = @JoinColumn( name = "id_tarif" ) )
-    private Set<Tarif> tarifs = new HashSet<>();
+    private String activities;
 
 }
