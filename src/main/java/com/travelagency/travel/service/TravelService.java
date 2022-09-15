@@ -20,7 +20,13 @@ public class TravelService {
         Pageable pageable = PageRequest.of(page, pageSize);
         return repository.findAll(pageable).toList();
     }
-
+    public List<Travel> findTravelByDescription(String descrip){
+        if(descrip== null || descrip.isEmpty()) {
+            return null;
+        }
+        String output = descrip.substring(0).toLowerCase();
+        return repository.findByDescriptionContaining(output);
+    }
     public Optional<Travel> findTravelById(Long id){
         return repository.findById(id);
     }

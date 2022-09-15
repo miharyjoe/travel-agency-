@@ -30,6 +30,11 @@ public class TravelController {
         return service.findAllTravels(page, page_size);
     }
 
+    @GetMapping("/descriptions")
+    public List<Travel> getTravelByDescription(@RequestParam String desc) {
+        return service.findTravelByDescription(desc);
+    }
+
     @GetMapping("/{id}")
     public Optional<Travel> getTravelById(@PathVariable Long id){
         return service.findTravelById(id);
