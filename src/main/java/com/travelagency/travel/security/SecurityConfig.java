@@ -16,6 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
@@ -28,10 +33,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
             .cors()
             .and()
-            .authorizeRequests().anyRequest().permitAll()
+            .authorizeRequests()
+            .antMatchers( GET, "/travels/**").permitAll()
+            .antMatchers(POST, "/travels/**").hasAnyRole("ADMIN")
+            .antMatchers(PUT, "/travels/**").hasAnyRole("ADMIN")
+            .antMatchers(DELETE, "/travels/**").hasAnyRole("ADMIN")
+            .antMatchers( GET, "/reservations/**").hasAnyRole("ADMIN","USER")
+            .antMatchers(POST, "/reservations/**").hasAnyRole("ADMIN","USER")
+            .antMatchers(PUT, "/reservations/**").hasAnyRole("ADMIN")
+            .antMatchers(DELETE, "/reservations/**").hasAnyRole("ADMIN")
             .and()
             .formLogin()
-            .loginPage("http://localhost:3000/")
+            .loginPage("http://localhost:3000/login")
             .and()
             .logout()
             .permitAll()
