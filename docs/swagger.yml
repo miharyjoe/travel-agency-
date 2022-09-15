@@ -1,0 +1,690 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/HEIMIHARY2/TravelAgency/1.0.0
+info:
+  description: This is a API for travel Agency
+  version: "1.0.0"
+  title: Travel Agency API
+  contact:
+    email: hei.mihary.2@gmail.com
+
+tags:
+  - name: Travel
+  - name: Reservation
+  - name: User
+  
+paths:
+  /travels:
+    get:
+      tags:
+        - Travel
+      summary: get all travel offers
+      operationId: getTravels
+      description: |
+          see travel offers
+      parameters:
+        - name: page
+          in: query
+          schema:
+            $ref: '#/components/schemas/Page'
+        - name: page_size
+          in: query
+          schema:
+            $ref: '#/components/schemas/PageSize'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Travel'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    post:
+      tags:
+        - Travel
+      summary: adds travels
+      operationId: addTravel
+      description: Adds travels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTravel'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Travel'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    put:
+      tags:
+        - Travel
+      summary: update travels
+      operationId: updateTravel
+      description: uppdate travels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Travel'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Travel'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /travels/{id}:
+    get:
+      tags:
+        - Travel
+      summary: get travel by id
+      operationId: getTravelById
+      description: getTravelById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Travel'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    delete:
+      tags:
+        - Travel
+      summary: delete travel by id
+      operationId: deleteTravelById
+      description: deleteTravelById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: remove successfully
+  /reservations:
+    get:
+      tags: 
+        - Reservation
+      summary: get all reservation
+      operationId: getReservaton
+      description: |
+          see reservation offers
+      parameters:
+        - name: page
+          in: query
+          schema:
+            $ref: '#/components/schemas/Page'
+        - name: page_size
+          in: query
+          schema:
+            $ref: '#/components/schemas/PageSize'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    post:
+      tags:
+        - Reservation
+      summary: adds reservation
+      operationId: addReservation
+      description: Adds reservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateReservation'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateReservation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    put:
+      tags:
+        - Reservation
+      summary: update reservation
+      operationId: updateReservation
+      description: uppdatereservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReservation'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/CreateReservation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /reservations/{id}:
+    get:
+      tags:
+        - Reservation
+      summary: get Reservation by id
+      operationId: getReservationById
+      description: getReservationById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Reservation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    delete:
+      tags:
+        - Reservation
+      summary: delete activity by id
+      operationId: deleteReservationById
+      description: deleteReservationById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: remove successfully
+  /login:
+    post:
+      tags:
+        - User
+      summary: log User
+      operationId: postUserL
+      description: Adds User
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateUser'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+  /signup:
+    post:
+      tags:
+        - User
+      summary: signup User
+      operationId: postUser
+      description: Adds User
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/CreateUser'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateUser'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+components:
+  schemas:
+    CreateTravel:
+      type: object
+      properties:
+        description:
+          type: string
+        place_departure:
+          type: string
+        place_return:
+          type: string
+        date_departure:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+        nbr_place:
+          type: integer
+        country: 
+          type: string
+        tarif:   
+          type: number
+          format: double
+        activities:
+          type: string
+    Travel:
+      allOf:
+        - $ref: '#/components/schemas/CreateTravel'
+      properties:
+        travelId:
+          type: integer
+          format: int64
+    Exception:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+    BadRequestException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: BadRequestException
+        message: Bad request
+    NotAuthorizedException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: NotAuthorizedException
+        message: Not authorized
+    ResourceNotFoundException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: ResourceNotFoundException
+        message: Resource of type <T> identified by <I> not found
+    TooManyRequestsException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: TooManyRequestsException
+        message: Too many requests
+    InternalServerException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: InternalServerException
+        message: Unexpected error
+    Page:
+      type: integer
+      description: Start at `1`
+    PageSize:
+      type: integer
+      description: Cannot exceed `500`
+    CreateReservation:
+      type: object
+      properties:
+        nbr_person:
+          type: integer
+        id_travel:
+          type: integer
+          format: int64
+        id_user:
+          type: integer
+          format: int64
+    Reservation:
+      properties:
+        nbr_person:
+          type: integer
+        travel:
+           $ref: '#/components/schemas/Travel'
+        user:
+          $ref: '#/components/schemas/User'
+    CreateUser:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        roles:
+          type: string
+          enum:
+            - ADMIN
+            - USER
+        locked:  
+          type: boolean
+        enable:
+          type: boolean
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        roles:
+          type: string
+          enum:
+            - ADMIN
+            - USER
+    User:
+      allOf:
+        - $ref: '#/components/schemas/CreateUser'
+      properties:
+        id:
+          type: integer
+          format: int64
