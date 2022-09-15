@@ -22,11 +22,11 @@ public class LoginController {
     @PostMapping(value = "/login" ,consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String login(@RequestBody RegistrationForm users) {
         if(users.getPassword()  != registrationService.getPassword(users.getEmail())){
-            return "connexion NON faite";
+            return "connexion failed";
         }
         else {
             registrationService.loadUserByUsername(users.getEmail());
-            return "connexion non faite";
+            return "connexion successfully";
         }
     }
 }
